@@ -40,7 +40,7 @@ const SignIn = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-black h-full">
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 my-6"
@@ -54,12 +54,13 @@ const SignIn = () => {
             className="w-[115px] h-[34px]"
           />
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to Aora
+         <Text className="text-xl text-white mt-2 font-pmedium">
+          <Text className="text-secondary-100">LogIn</Text> into your account
           </Text>
 
           <FormField
             title="Email"
+            placeholder="Enter your email adress"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
@@ -68,6 +69,7 @@ const SignIn = () => {
 
           <FormField
             title="Password"
+            placeholder="Enter your email password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"

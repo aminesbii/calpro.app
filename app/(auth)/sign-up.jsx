@@ -56,12 +56,13 @@ const SignUp = () => {
             className="w-[115px] h-[34px]"
           />
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
+          <Text className="text-xl text-white mt-2 font-pmedium">
           <Text className="text-secondary-100">SignUp</Text> into a new account
           </Text>
 
           <FormField
             title="Username"
+            placeholder="Enter Username"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
@@ -69,6 +70,7 @@ const SignUp = () => {
 
           <FormField
             title="Email"
+            placeholder="Enter your email adress"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
@@ -77,6 +79,7 @@ const SignUp = () => {
 
           <FormField
             title="Password"
+            placeholder="Enter your password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"

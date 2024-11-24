@@ -1,58 +1,81 @@
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {ScrollView, Text, View, Image } from 'react-native';
-import { Link, router } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { images } from '../constants';
+import { Text, View } from 'react-native';
+import { Link, Redirect, router } from 'expo-router';
 import CustomButton from '../components/CustomButton';
 import { useGlobalContext } from '../context/GlobalProvider';
-
+import SplashScreen from './SplashScreen'; // Import the splash screen
+import { ImageBackground, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function App() {
-  const {isLoading , isLoggedIn } = useGlobalContext();
-  if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
+  const { isLoading, isLoggedIn } = useGlobalContext();
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 3000); // 3-second splash screen
+    return () => clearTimeout(timer); // Cleanup timer on unmount
+  }, []);
+
+  if (showSplash) return <SplashScreen />; // Show splash screen if true
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/home" />; // Redirect if logged in
+
+  const navigation = useNavigation();
 
   return (
-    <SafeAreaView className="bg-black h-full">
-      <ScrollView contentContainerStyle={{ height: '100%'}}>
-        <View className="w-full justify-center items-center min-h-[85vh] px-4">
-          <Image
-            source={images.logo}
-            className="w-[130px] h-[84px]"
-            resizeMode='contain'
-          />
+    <ImageBackground
+      source={require('C:/Users/Amine/OneDrive/Desktop/CalPro/assets/images/imga.jpeg')}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.mainText}>ACHIEVE YOUR PEAK FORM</Text>
+        <Text style={styles.subText}>BUILD YOUR FITNESS START TRACKER ACHIEVE BODY GOALS</Text>
 
-          <Image 
-            source={images.cards}
-            className="max-w--[380px] w-full h-[300px]"
-            resizeMode='contain'
-          />
-
-                   
-
-          <View className="relative mt-5">
-             <Text className="text-3xl text-white font-bold text-center">Achieve Peak Performance with{' '} 
-             <Text className="text-secondary-100">CalPro</Text>
-             </Text>
-             <Image 
-               source={images.path}
-               className ="w-[136px] h-[15px] absolute -bottom-2 -right-8"
-               resizeMode='contain'
-               />  
-          </View>
-
-          <CustomButton
-             title="Continue with email"
-             handlePress={() => router.push('/sign-in')}
-             containerStyles="w-full mt-7"
-          />
-
-           <Link href="/home" className="text-lg  mt-7 font-psemibold text-secondary" >Home</Link>
-        </View>
-      </ScrollView>
-
-      <StatusBar backgroundColor='black' style='light'/> 
-    </SafeAreaView>
-  );  
+        <CustomButton
+          title="Create account now"
+          handlePress={() => router.push('/sign-up')}
+          containerStyles="w-full mt-4"
+        />
+        <Link href="/home" style={styles.linkText}>
+          click me if you have an account
+        </Link>
+      </View>
+      <StatusBar style='light' />
+    </ImageBackground>
+  );
 }
 
-
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-end', // Aligns content at the bottom
+    paddingHorizontal: 20,
+    paddingBottom: 40, // Adds some padding at the bottom to prevent content from being too close to the edge
+    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark overlay for better text contrast
+  },
+  mainText: {
+    color: '#fff',
+    fontSize: 50,
+    fontWeight: 'bold',
+  },
+  subText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '300',
+    marginTop: 6,
+    marginBottom: 10,
+  },
+  linkText: {
+    fontSize: 14,
+    color: '#e50914',
+    marginTop: 20,
+  },
+});

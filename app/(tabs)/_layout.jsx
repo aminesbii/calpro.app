@@ -1,19 +1,14 @@
 import { View, Text, Image } from 'react-native';
 import { Tabs } from 'expo-router';
-import { icons } from '../../constants';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
 
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
     <View className="items-center justify-center gap-2">
       {typeof icon === 'object' ? (
-        icon // Render component if `icon` is an Ionicons component
+        icon 
       ) : (
         <Image
           source={icon}
@@ -38,7 +33,7 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: '#e85002',
+          tabBarActiveTintColor: '#e50914',
           tabBarInactiveTintColor: '#a7a7a7',
           tabBarStyle: {
             backgroundColor: '#000',
@@ -62,22 +57,22 @@ const TabsLayout = () => {
             ),
           }}
         />
-                <Tabs.Screen
+        <Tabs.Screen
           name="foods"
           options={{
             title: 'Foods',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={<Ionicons name="fast-food" size={26} color={color} />}
+                icon={<MaterialCommunityIcons name="food" size={24} color={color} />}
                 color={color}
-                name="Food List"
+                name="Foods"
                 focused={focused}
               />
             ),
           }}
-        />
-        
+        /> 
+
         <Tabs.Screen
           name="scan"
           options={{
@@ -93,22 +88,23 @@ const TabsLayout = () => {
             ),
           }}
         />
-
-        <Tabs.Screen
-          name="calculator"
+        
+      <Tabs.Screen
+          name="plans"
           options={{
-            title: 'Calculator',
+            title: 'Plans',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={<FontAwesome6 name="calculator" size={24} color={color} />}
+                icon={<MaterialCommunityIcons name="clipboard-text" size={24} color={color} />}
                 color={color}
-                name="Calculator"
+                name="Plans"
                 focused={focused}
               />
             ),
           }}
         />
+        
         <Tabs.Screen
           name="profile"
           options={{
@@ -124,6 +120,9 @@ const TabsLayout = () => {
             ),
           }}
         />
+
+
+        
       </Tabs>
     </>
   );

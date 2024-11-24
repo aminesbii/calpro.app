@@ -10,9 +10,9 @@ const Gender = [
 ];
 
 const Goals = [
-    { label: 'Nothing', value: 'Nothing' },
-    { label: 'Bulk', value: 'bulk' },
-    { label: 'Cut', value: 'cut' },
+    { label: 'Maintain ', value: 'Maintain' },
+    { label: 'Bulk', value: 'Bulk' },
+    { label: 'Cut', value: 'Cut' },
 ];
 
 const Calculator = () => {
@@ -29,7 +29,6 @@ const Calculator = () => {
 
 
     const calculateMacros = () => {
- // Start button animation
         if (!weight || !height || !age || !gender || goal === null) {
             Alert.alert("Please fill out all fields");
             return;
@@ -47,7 +46,7 @@ const Calculator = () => {
 
         let dailyCalories = BMR * 1.2;
 
-        // Adjust calories based on goal
+
         if (goal === 'bulk') {
             dailyCalories += 500;
         } else if (goal === 'cut') {
@@ -66,7 +65,10 @@ const Calculator = () => {
             - Protein: ${protein.toFixed(0)}g
             - Fats: ${fats.toFixed(0)}g`
         );
+
+        
     };
+
 
     return (
         <SafeAreaView style={styles.container} className="w-full bg-black">
@@ -77,8 +79,8 @@ const Calculator = () => {
             minHeight: Dimensions.get("window").height - 250,
           }}
            >
-                <Text style={styles.title} className=" text-white">Calculate Your Macros</Text>
-                <View className="border-2 border-gray-300 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary items-center flex-row space-x-4">
+              
+                <View className="border-2 border-gray-400 w-full h-16 px-4 mt-5 rounded-3xl focus:border-secondary-100 items-center flex-row space-x-4">
                     <TextInput
                         className="flex-1 text-base text-white font-pregular mt-0.5"
                         value={height}
@@ -90,7 +92,7 @@ const Calculator = () => {
                 </View>
 
                 <View>
-                    <View className="border-2 border-gray-300 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary items-center flex-row space-x-4 mt-5">
+                    <View className="border-2 border-gray-400 w-full h-16 px-4 rounded-3xl focus:border-secondary-100 items-center flex-row space-x-4 mt-5">
                         <TextInput
                             className="flex-1 text-base text-white font-pregular mt-0.5"
                             value={weight}
@@ -117,7 +119,8 @@ const Calculator = () => {
                     </Modal>
                 </View>
 
-                <View className="border-2 border-gray-300 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary items-center flex-row space-x-4 mt-5">
+                <View className="border-2 border-gray-400 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary-100 items-center flex-row space-x-4 mt-5">
+                    
                     <TextInput
                         className="flex-1 text-base text-white font-pregular mt-0.5"
                         value={age}
@@ -127,13 +130,12 @@ const Calculator = () => {
                         onChangeText={setAge}
                     />
                 </View>
-
                 <View style={styles.genderGoalContainer} >
-                    <View style={styles.genderContainer}  className="mt-4">
-                        <Text className=" text-white mb-5">gender</Text>
-                        <Dropdown
-                            style={[styles.dropdown, isFocus && { borderColor: '#e85002' }]}
+                    <View style={styles.genderContainer}  className="mt-2">
+                    <Dropdown
+                            style={[styles.dropdowns, isFocus && { borderColor: '#e50914' }]}
                             selectedTextStyle={styles.selectedTextStyle}
+                            placeholderStyle={{ color: '#646464' }} 
                             data={Gender}
                             maxHeight={300}
                             labelField="label"
@@ -147,13 +149,14 @@ const Calculator = () => {
                                 setIsFocus(false);
                             }}
                         />
+
                     </View>
 
-                    <View style={styles.goalContainer} className="mt-4" >
-                        <Text className=" text-white mb-5">objective</Text>
+                    <View style={styles.goalContainer} className="mt-2" >
                         <Dropdown
-                            style={[styles.dropdown, isFocus && { borderColor: '#e85002' }]}
+                            style={[styles.dropdown, isFocus && { borderColor: '#e50914' } ]}
                             selectedTextStyle={styles.selectedTextStyle}
+                            placeholderStyle={{ color: '#646464' }} 
                             data={Goals}
                             maxHeight={300}
                             labelField="label"
@@ -169,12 +172,14 @@ const Calculator = () => {
                         />
                     </View>
                 </View>
-
-              <CustomButton
+                
+                <View className="m-1">
+                <CustomButton
                 title="Calculate Macros"
                 handlePress={calculateMacros}
-                containerStyles="mt-7"
+                containerStyles="mt-1"
                 isLoading={isSubmitting}/> 
+                </View>
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -188,7 +193,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     input: {
-        backgroundColor: 'gainsboro',
+        backgroundColor: 'black',
         padding: 10,
         borderRadius: 20,
         borderWidth: 1,
@@ -198,7 +203,7 @@ const styles = StyleSheet.create({
         width: 75,
         paddingVertical: 5,
         paddingHorizontal: 16,
-        backgroundColor: '#e85002',
+        backgroundColor: '#e50914',
         borderRadius: 14,
         justifyContent: 'center',
         alignItems: 'center',
@@ -219,7 +224,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         marginBottom: 20,
         marginTop: 20,
-        marginLeft: 8,
+        margin: 2,
     },
     genderContainer: {
         flex: 1,
@@ -228,14 +233,6 @@ const styles = StyleSheet.create({
     goalContainer: {
         flex: 1,
     },
-    buttonText: {
-        backgroundColor: '#e85002',
-        color: 'white',
-        padding: 15,
-        textAlign: 'center',
-        borderRadius: 5,
-        fontWeight: 'bold',
-    },
     modalOverlay: {
         flex: 1,
         justifyContent: 'center',
@@ -243,7 +240,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     dropdownMenu: {
-        backgroundColor: 'white',
+        backgroundColor: '#eaeaea',
         borderRadius: 10,
         padding: 10,
         width: 200,
@@ -256,12 +253,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     dropdown: {
-      height: 50,
-      borderColor: '#333333',
+      height: 60,
+      borderColor: '#191919',
       borderWidth: 2,
-      borderRadius: 10,
-      paddingHorizontal: 8,
+      borderRadius: 16,
+      paddingHorizontal: 12,
   },
+   dropdowns: {
+    height: 60,
+    borderColor: '#191919',
+    borderWidth: 2,
+    borderRadius: 16,
+    paddingHorizontal: 12,
+},
     selectedTextStyle: {
         color: 'white',
     },

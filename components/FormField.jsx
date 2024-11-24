@@ -10,10 +10,10 @@ const FormField = ( { title, value, placeholder, handleChangeText, otherStyles, 
       <Text className="text-base text-gray-200 font-pmedium">{title}</Text>
       <View className="border-2 border-gray-300 w-full h-16 px-4  rounded-2xl focus:border-secondary items-center flex-row">
         <TextInput
-          className="flex-1 text-white font-psemibold text-base"
+          className="flex-1 text-white font-pregular"
           value={value}
           placeholder={placeholder}
-          placeholderTextColor="gray-100"
+          placeholderTextColor="#646464"
           onChangeText={handleChangeText}
           secureTextEntry={title === 'Password' && !showPassword}
         />

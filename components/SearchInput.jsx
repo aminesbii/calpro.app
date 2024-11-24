@@ -11,7 +11,7 @@ const preformSearch = () =>{
 
 
   return (
-      <View className="border-2 border-gray-300 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary items-center flex-row space-x-4">
+      <View className="border-2 border-gray-300 w-full h-16 px-4 bg-black rounded-3xl focus:border-secondary-100 items-center flex-row space-x-4">
         <TextInput
           className="flex-1 text-base text-white font-pregular mt-0.5"
           value={search}
@@ -22,7 +22,7 @@ const preformSearch = () =>{
         {search && <Button title='search' onPress={preformSearch}/>}
 
         <TouchableOpacity>
-         <Feather name="search" size={24} color="#e85002" />
+         <Feather name="search" size={24} color="#e50914" />
         </TouchableOpacity>
       </View>
   )
